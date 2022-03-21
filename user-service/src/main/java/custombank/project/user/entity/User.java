@@ -3,19 +3,18 @@ package custombank.project.user.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name=User.TABLE_NAME)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
+    public static final String TABLE_NAME= "USERS";
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
     private String firstName;
     private String middleName;

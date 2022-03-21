@@ -1,5 +1,6 @@
 package custombank.project.user.controller;
 
+import custombank.project.user.ValueObjects.UserAccountsResponseTemplate;
 import custombank.project.user.entity.User;
 import custombank.project.user.service.UserService;
 import lombok.extern.log4j.Log4j2;
@@ -20,9 +21,15 @@ public class UserController {
         return userService.createUser(user);
     }
 
-    @GetMapping("/{userId}")
+    @GetMapping("/getuser/{userId}")
     public User getUser(@PathVariable Long userId){
         log.debug("Fetching user with id (in User controller): " + userId.toString());
         return userService.getUser(userId);
     }
+
+    @GetMapping("/getuseraccounts/{userId}")
+    public UserAccountsResponseTemplate getUserFinAccounts(@PathVariable Long userId){
+        return userService.getUserFinAccounts(userId);
+    }
+
 }
