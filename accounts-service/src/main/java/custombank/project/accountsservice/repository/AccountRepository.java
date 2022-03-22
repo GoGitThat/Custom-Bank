@@ -1,6 +1,5 @@
 package custombank.project.accountsservice.repository;
 
-import custombank.project.accountsservice.ValueObjects.AccountIdentifier;
 import custombank.project.accountsservice.entity.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -7,11 +7,12 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Account {
-    private int accountType;
-    private int userId;
+@AllArgsConstructor
+public class PlainAccountObject {
+    private Integer accountType;
+    private Long userId;
     private BigDecimal balance;
     private boolean frozen;
 }
+

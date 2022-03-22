@@ -1,5 +1,6 @@
 package custombank.project.accountsservice.service;
 
+import custombank.project.accountsservice.ValueObjects.PlainAccountObject;
 import custombank.project.accountsservice.ValueObjects.UserAccounts;
 import custombank.project.accountsservice.entity.Account;
 import custombank.project.accountsservice.repository.AccountRepository;
@@ -7,6 +8,7 @@ import custombank.project.accountsservice.repository.AccountTypesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -29,7 +31,18 @@ public class AccountService {
 
     public UserAccounts getUserFinAccounts(Long userId) {
         UserAccounts userAccounts = new UserAccounts();
-        userAccounts.setListOfAccounts(accountRepository.findAllByUserId(userId));
+        List<HashMap<String, PlainAccountObject>> accs = new LinkedList<>();
+        accountRepository.findAllByUserId(userId).forEach(account -> {
+            HashMap<String, PlainAccountObject> newAcc = new HashMap<>();
+            PlainAccountObject pao = new PlainAccountObject();
+            pao.setUserId(account.getUserId());
+            pao.setAccountType(account.getAccountType());
+            pao.setBalance(account.getBalance());
+            pao.setFrozen(account.isFrozen());
+            newAcc.put(account.getAccountTypes().getAccountDescription(), pao);
+            accs.add(newAcc);
+        });
+        userAccounts.setListOfAccounts(accs);
         return userAccounts;
     }
 }

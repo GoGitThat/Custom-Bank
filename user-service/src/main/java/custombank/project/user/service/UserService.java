@@ -1,6 +1,5 @@
 package custombank.project.user.service;
 
-import custombank.project.user.ValueObjects.Account;
 import custombank.project.user.ValueObjects.UserAccounts;
 import custombank.project.user.ValueObjects.UserAccountsResponseTemplate;
 import custombank.project.user.entity.User;
@@ -9,8 +8,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.List;
 
 @Service
 @Log4j2

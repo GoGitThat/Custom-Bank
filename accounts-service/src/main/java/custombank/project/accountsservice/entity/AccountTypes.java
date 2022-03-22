@@ -1,10 +1,17 @@
 package custombank.project.accountsservice.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = AccountTypes.TABLE_NAME)
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class AccountTypes {
     public static final String TABLE_NAME= "ACCOUNT_TYPES";
     @Id
