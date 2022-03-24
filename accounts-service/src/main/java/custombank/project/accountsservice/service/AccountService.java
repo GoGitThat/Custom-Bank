@@ -7,6 +7,7 @@ import custombank.project.accountsservice.repository.AccountRepository;
 import custombank.project.accountsservice.repository.AccountTypesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -20,6 +21,9 @@ public class AccountService {
 
     @Autowired
     private AccountTypesRepository accountTypesRepository;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     public Account createAccount(Account a){
         if (accountTypesRepository.existsById(a.getAccountType()) &&

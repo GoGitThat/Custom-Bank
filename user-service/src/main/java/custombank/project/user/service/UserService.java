@@ -32,7 +32,7 @@ public class UserService {
     public UserAccountsResponseTemplate getUserFinAccounts(Long userId) {
         UserAccountsResponseTemplate newResponse = new UserAccountsResponseTemplate();
         UserAccounts listOfAccounts =
-                restTemplate.getForObject("http://localhost:9002/accounts/"+userId.toString(), UserAccounts.class);
+                restTemplate.getForObject("http://ACCOUNTS-SERVICE/accounts/"+userId.toString(), UserAccounts.class);
         newResponse.setAccountList(listOfAccounts);
         newResponse.setUser(userRepository.findByUserId(userId));
         return newResponse;

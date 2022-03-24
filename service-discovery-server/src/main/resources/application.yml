@@ -1,0 +1,8 @@
+server:
+  port: 8761 #default
+
+eureka:
+  client:
+    #no need to register itself (maybe useful if other servers/instances are running)
+    register-with-eureka: false
+    fetch-registry: false
