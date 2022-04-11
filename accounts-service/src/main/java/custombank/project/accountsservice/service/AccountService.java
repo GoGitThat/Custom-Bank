@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -49,4 +50,15 @@ public class AccountService {
         userAccounts.setListOfAccounts(accs);
         return userAccounts;
     }
+
+    public boolean transactAmount(Long userId, BigDecimal amount, Integer accountType){
+        Account userAccount = accountRepository.findByAccountTypeAndUserId(accountType, userId);
+        if (userAccount.getBalance().compareTo(amount) > 0){
+            userAccount.setBalance(userAccount.getBalance().subtract(amount));
+            accountRepository.save(userAccount);
+            return true;
+        }
+        return false;
+    }
+
 }
