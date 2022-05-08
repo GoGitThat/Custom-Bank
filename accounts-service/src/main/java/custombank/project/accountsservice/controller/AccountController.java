@@ -6,6 +6,7 @@ import custombank.project.accountsservice.entity.Account;
 import custombank.project.accountsservice.exceptions.InsufficientFundsException;
 import custombank.project.accountsservice.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,9 @@ public class AccountController {
 
     @Autowired
     private AccountService accountService;
+
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
 
     @PostMapping("/create")
     public Account createAccount(@RequestBody Account account){
@@ -31,6 +35,7 @@ public class AccountController {
     public void transaction(@RequestBody Transaction transaction) throws InsufficientFundsException {
         if (accountService.transactAmount(transaction.getUserId(), transaction.getAmount(), transaction.getAccountType())){
             //post transaction to kafka
+            kafkaTemplate.send("Transactions","transactKey","test");
         }else {
             throw new InsufficientFundsException();
         }
